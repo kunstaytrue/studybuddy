@@ -77,6 +77,23 @@ class MainActivity : ComponentActivity() {
                         }) {
                             Text(text = "False")
                         }
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        Text(text = feedback.value, style = MaterialTheme.typography.bodyLarge)
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        Button(onClick = {
+                            if (currentQuestionIndex.value < questions.size - 1) {
+                                currentQuestionIndex.value++
+                                feedback.value = ""
+                            } else {
+                                showScoreScreen.value = true
+                            }
+                        }) {
+                            Text(text = "Next")
+                        }
+                    }
+
 
 
 
