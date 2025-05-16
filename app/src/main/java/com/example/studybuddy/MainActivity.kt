@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
 
             Box(modifier = Modifier.fillMaxSize()) {
                 Image(
-                    painter = painterResource(id=R.drawable.a6_flashcards_blauw_gelinieerd_voorzijde),
+                    painter = painterResource(id=R.drawable.unnamed),
                     contentDescription = null ,
                     contentScale= ContentScale.FillBounds,
                     modifier= Modifier.fillMaxSize()
