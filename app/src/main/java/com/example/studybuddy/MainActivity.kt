@@ -22,16 +22,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.studybuddy.ui.theme.StudybuddyTheme
+import kotlin.system.exitProcess
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            var showWelcomeScreen = remember { mutableStateOf(true) }
-            var currentQuestionIndex = remember { mutableStateOf(0) }
-            var score = remember { mutableStateOf(0) }
-            var showScoreScreen = remember { mutableStateOf(false) }
+            val showWelcomeScreen = remember { mutableStateOf(true) }
+            val currentQuestionIndex = remember { mutableStateOf(0) }
+            val score = remember { mutableStateOf(0) }
+            val showScoreScreen = remember { mutableStateOf(false) }
+            val feedback = remember { mutableStateOf("") }
 
             val questions = arrayOf(
                 "The Great Wall of China is visible from space.",
@@ -48,7 +50,7 @@ class MainActivity : ComponentActivity() {
                 verticalArrangement = Arrangement.Center
             ) {
                 if (showWelcomeScreen.value) {
-                    Text(text = "Welcome to the MY5thtry App!", style = MaterialTheme.typography.headlineLarge)
+                    Text(text = "Welcome to the StudyBuddy App!", style = MaterialTheme.typography.headlineLarge)
                     Spacer(modifier = Modifier.height(24.dp))
 
                     Button(onClick = { showWelcomeScreen.value = false }) {
@@ -58,10 +60,8 @@ class MainActivity : ComponentActivity() {
                     Text(text = questions[currentQuestionIndex.value], style = MaterialTheme.typography.headlineLarge)
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    var feedback by remember { mutableStateOf("") }
-
                     Button(onClick = {
-                        feedback = if (answers[currentQuestionIndex.value]) "Correct!" else "Incorrect"
+                        feedback.value = if (answers[currentQuestionIndex.value]) "Correct!" else "Incorrect"
                         if (answers[currentQuestionIndex.value]) score.value++
                     }) {
                         Text(text = "True")
@@ -69,51 +69,13 @@ class MainActivity : ComponentActivity() {
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Button(onClick = {
-                        feedback = if (!answers[currentQuestionIndex.value]) "Correct!" else "Incorrect"
+                        feedback.value = if (!answers[currentQuestionIndex.value]) "Correct!" else "Incorrect"
                         if (!answers[currentQuestionIndex.value]) score.value++
                     }) {
-                        Text(text = "False")
-                    }
-                    Spacer(modifier = Modifier.height(16.dp))
 
-                    Text(text = feedback, style = MaterialTheme.typography.bodyLarge)
 
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    Button(onClick = {
-                        if (currentQuestionIndex.value < questions.size - 1) {
-                            currentQuestionIndex.value++
-                            feedback = ""
-                        } else {
-                            showScoreScreen.value = true
-                        }
-                    }) {
-                        Text(text = "Next")
-                    }
-                } else {
-                    Text(text = "Your Score: ${score.value}/${questions.size}", style = MaterialTheme.typography.headlineLarge)
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    Text(text = if (score.value >= 3) "Great job!" else "Keep practicing!", style = MaterialTheme.typography.bodyLarge)
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    Button(onClick = {
-                        currentQuestionIndex.value = 0
-                        score.value = 0
-                        showWelcomeScreen.value = true
-                        showScoreScreen.value = false
-                    }) {
-                        Text(text = "Review")
                     }
 
 
-
-
-
-
-
-                }
-    }
-}
+                    }
 
