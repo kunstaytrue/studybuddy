@@ -106,6 +106,25 @@ class MainActivity : ComponentActivity() {
                         }) {
                             Text(text = "Review Answers")
                         }
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        Button(onClick = { exitProcess(0) }) {
+                            Text(text = "Exit")
+                        }
+                    }
+                    showReviewScreen.value -> {
+                        Text(text = "Review All Questions & Answers:", style = MaterialTheme.typography.headlineLarge)
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        questions.forEachIndexed { index, question ->
+                            Text(text = "❓ $question", style = MaterialTheme.typography.bodyLarge)
+                            Text(
+                                text = "✅ Correct Answer: ${if (answers[index]) "True" else "False"}",
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                            Spacer(modifier = Modifier.height(8.dp))
+                        }
+
 
 
 
