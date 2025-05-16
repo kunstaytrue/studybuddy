@@ -50,18 +50,25 @@ class MainActivity : ComponentActivity() {
                 verticalArrangement = Arrangement.Center
             ) {
                 if (showWelcomeScreen.value) {
-                    Text(text = "Welcome to the StudyBuddy App!", style = MaterialTheme.typography.headlineLarge)
+                    Text(
+                        text = "Welcome to the StudyBuddy App!",
+                        style = MaterialTheme.typography.headlineLarge
+                    )
                     Spacer(modifier = Modifier.height(24.dp))
 
                     Button(onClick = { showWelcomeScreen.value = false }) {
                         Text(text = "Start")
                     }
                 } else if (!showScoreScreen.value) {
-                    Text(text = questions[currentQuestionIndex.value], style = MaterialTheme.typography.headlineLarge)
+                    Text(
+                        text = questions[currentQuestionIndex.value],
+                        style = MaterialTheme.typography.headlineLarge
+                    )
                     Spacer(modifier = Modifier.height(16.dp))
 
                     Button(onClick = {
-                        feedback.value = if (answers[currentQuestionIndex.value]) "Correct!" else "Incorrect"
+                        feedback.value =
+                            if (answers[currentQuestionIndex.value]) "Correct!" else "Incorrect"
                         if (answers[currentQuestionIndex.value]) score.value++
                     }) {
                         Text(text = "True")
@@ -69,7 +76,8 @@ class MainActivity : ComponentActivity() {
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Button(onClick = {
-                        feedback.value = if (!answers[currentQuestionIndex.value]) "Correct!" else "Incorrect"
+                        feedback.value =
+                            if (!answers[currentQuestionIndex.value]) "Correct!" else "Incorrect"
                         if (!answers[currentQuestionIndex.value]) score.value++
                     }) {
                         Text(text = "False")
@@ -90,10 +98,16 @@ class MainActivity : ComponentActivity() {
                         Text(text = "Next")
                     }
                 } else {
-                    Text(text = "Your Score: ${score.value}/${questions.size}", style = MaterialTheme.typography.headlineLarge)
+                    Text(
+                        text = "Your Score: ${score.value}/${questions.size}",
+                        style = MaterialTheme.typography.headlineLarge
+                    )
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    Text(text = if (score.value >= 3) "Great job!" else "Keep practicing!", style = MaterialTheme.typography.bodyLarge)
+                    Text(
+                        text = if (score.value >= 3) "Great job!" else "Keep practicing!",
+                        style = MaterialTheme.typography.bodyLarge
+                    )
                     Spacer(modifier = Modifier.height(16.dp))
 
                     Button(onClick = {
@@ -103,16 +117,18 @@ class MainActivity : ComponentActivity() {
                         showScoreScreen.value = false
                         feedback.value = ""
                     }) {
-
-
+                        Text(text = "Review")
                     }
+                    Spacer(modifier = Modifier.height(8.dp))
 
-
+                    Button(onClick = { exitProcess(0) }) {
+                        Text(text = "Exit")
                     }
+                }
+            }
+        }
+    }}
 
 
-                    }
 
-
-                    }
 
