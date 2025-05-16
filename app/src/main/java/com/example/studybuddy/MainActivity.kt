@@ -54,8 +54,22 @@ class MainActivity : ComponentActivity() {
                     Button(onClick = { showWelcomeScreen.value = false }) {
                         Text(text = "Start")
                     }
-                    
-            }
+                } else if (!showScoreScreen.value) {
+                    Text(text = questions[currentQuestionIndex.value], style = MaterialTheme.typography.headlineLarge)
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    var feedback by remember { mutableStateOf("") }
+
+                    Button(onClick = {
+                        feedback = if (answers[currentQuestionIndex.value]) "Correct!" else "Incorrect"
+                        if (answers[currentQuestionIndex.value]) score.value++
+                    }) {
+                        Text(text = "True")
+                    }
+
+
+
+                }
     }
 }
 
