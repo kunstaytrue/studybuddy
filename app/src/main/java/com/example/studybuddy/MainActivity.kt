@@ -93,6 +93,20 @@ class MainActivity : ComponentActivity() {
                             Text(text = "Next")
                         }
                     }
+                    showScoreScreen.value -> {
+                        Text(text = "Your Score: ${score.value}/${questions.size}", style = MaterialTheme.typography.headlineLarge)
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        Text(text = if (score.value >= 3) "Great job!" else "Keep practicing!", style = MaterialTheme.typography.bodyLarge)
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        Button(onClick = {
+                            showScoreScreen.value = false
+                            showReviewScreen.value = true
+                        }) {
+                            Text(text = "Review Answers")
+                        }
+
 
 
 
