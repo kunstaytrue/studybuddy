@@ -90,6 +90,24 @@ class MainActivity : ComponentActivity() {
                     }) {
                         Text(text = "Next")
                     }
+                } else {
+                    Text(text = "Your Score: ${score.value}/${questions.size}", style = MaterialTheme.typography.headlineLarge)
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Text(text = if (score.value >= 3) "Great job!" else "Keep practicing!", style = MaterialTheme.typography.bodyLarge)
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Button(onClick = {
+                        currentQuestionIndex.value = 0
+                        score.value = 0
+                        showWelcomeScreen.value = true
+                        showScoreScreen.value = false
+                    }) {
+                        Text(text = "Review")
+                    }
+
+
 
 
 
