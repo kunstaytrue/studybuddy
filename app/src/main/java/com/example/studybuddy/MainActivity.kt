@@ -125,6 +125,22 @@ class MainActivity : ComponentActivity() {
                             Spacer(modifier = Modifier.height(8.dp))
                         }
 
+                        Button(onClick = {
+                            showWelcomeScreen.value = true
+                            showReviewScreen.value = false
+                            currentQuestionIndex.value = 0
+                            score.value = 0
+                            feedback.value = ""
+                        }) {
+                            Text(text = "Restart Quiz")
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 
 
 
