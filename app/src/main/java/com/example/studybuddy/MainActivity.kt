@@ -34,6 +34,7 @@ class MainActivity : ComponentActivity() {
             val score = remember { mutableStateOf(0) }
             val showScoreScreen = remember { mutableStateOf(false) }
             val feedback = remember { mutableStateOf("") }
+            val showReviewScreen = remember { mutableStateOf(false) }
 
             val questions = arrayOf(
                 "The Great Wall of China is visible from space.",
@@ -49,85 +50,16 @@ class MainActivity : ComponentActivity() {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                if (showWelcomeScreen.value) {
-                    Text(
-                        text = "Welcome to the StudyBuddy App!",
-                        style = MaterialTheme.typography.headlineLarge
-                    )
-                    Spacer(modifier = Modifier.height(24.dp))
+                when {
+                    showWelcomeScreen.value -> {
+                        Text(text = "Welcome to the StudyBuddy App!", style = MaterialTheme.typography.headlineLarge)
+                        Spacer(modifier = Modifier.height(24.dp))
 
-                    Button(onClick = { showWelcomeScreen.value = false }) {
-                        Text(text = "Start")
-                    }
-                } else if (!showScoreScreen.value) {
-                    Text(
-                        text = questions[currentQuestionIndex.value],
-                        style = MaterialTheme.typography.headlineLarge
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    Button(onClick = {
-                        feedback.value =
-                            if (answers[currentQuestionIndex.value]) "Correct!" else "Incorrect"
-                        if (answers[currentQuestionIndex.value]) score.value++
-                    }) {
-                        Text(text = "True")
-                    }
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    Button(onClick = {
-                        feedback.value =
-                            if (!answers[currentQuestionIndex.value]) "Correct!" else "Incorrect"
-                        if (!answers[currentQuestionIndex.value]) score.value++
-                    }) {
-                        Text(text = "False")
-                    }
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    Text(text = feedback.value, style = MaterialTheme.typography.bodyLarge)
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    Button(onClick = {
-                        if (currentQuestionIndex.value < questions.size - 1) {
-                            currentQuestionIndex.value++
-                            feedback.value = ""
-                        } else {
-                            showScoreScreen.value = true
+                        Button(onClick = { showWelcomeScreen.value = false }) {
+                            Text(text = "Start")
                         }
-                    }) {
-                        Text(text = "Next")
                     }
-                } else {
-                    Text(
-                        text = "Your Score: ${score.value}/${questions.size}",
-                        style = MaterialTheme.typography.headlineLarge
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
 
-                    Text(
-                        text = if (score.value >= 3) "Great job!" else "Keep practicing!",
-                        style = MaterialTheme.typography.bodyLarge
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    Button(onClick = {
-                        currentQuestionIndex.value = 0
-                        score.value = 0
-                        showWelcomeScreen.value = true
-                        showScoreScreen.value = false
-                        feedback.value = ""
-                    }) {
-                        Text(text = "Review")
-                    }
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    Button(onClick = { exitProcess(0) }) {
-                        Text(text = "Exit")
-                    }
-                }
-            }
-        }
-    }}
 
 
 
