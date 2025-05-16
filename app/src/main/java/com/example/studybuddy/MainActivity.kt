@@ -66,10 +66,19 @@ class MainActivity : ComponentActivity() {
                     }) {
                         Text(text = "True")
                     }
+                    Spacer(modifier = Modifier.height(8.dp))
+
+                    Button(onClick = {
+                        feedback = if (!answers[currentQuestionIndex.value]) "Correct!" else "Incorrect"
+                        if (!answers[currentQuestionIndex.value]) score.value++
+                    }) {
+                        Text(text = "False")
 
 
 
-                }
+
+
+                    }
     }
 }
 
